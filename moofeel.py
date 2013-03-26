@@ -104,9 +104,6 @@ class Moofeel(object):
         rawdata = self.operate.read()
         print rawdata.decode('gbk')
 moofeel = Moofeel()
-username = 'nightfight'#你的moofeel网的帐号
-password = 'nightfight'#你的moofeel网的密码
-
 import mypasswd
 moofeel.setinfo(mypasswd.MOOFEEL_USERNAME,mypasswd.MOOFEEL_PASSWD)
 moofeel.login()

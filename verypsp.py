@@ -46,7 +46,6 @@ class Verypsp(object):
         else:
             print 'Logged on error'        
 verypsp = Verypsp()
-username = '6937365'#你的moofeel网的帐号
-password = 'niuniu'#你的moofeel网的密码
-verypsp.setinfo(username,password)
+import mypasswd
+verypsp.setinfo(mypasswd.VERYPSP_USERNAME,mypasswd.VERYPSP_PASSWD)
 verypsp.login()
