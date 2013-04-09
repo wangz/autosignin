@@ -44,13 +44,14 @@ class Moofeel(object):
         siteurl="http://www.moofeel.com/forum-96-1.html"
         isfind = False
         count = 0
-        while(isfind == False):
+        while(isfind == False and count<=300):
             count = count + 1
             print '尝试次数'+str(count)
             req = urllib2.Request(siteurl)
             self.operate = self.opener.open(req)
             rawdata = self.operate.read()
-            rawdata = rawdata.decode(chardet.detect(rawdata)['encoding'])
+            #rawdata = rawdata.decode(chardet.detect(rawdata)['encoding'])
+            rawdata = rawdata.decode("gbk")
             for m in BeautifulSoup(rawdata).findAll(attrs={'class' : re.compile("new")}):
                 e = m.find(attrs={'class' : re.compile("xst")})
             if(e!=None):
