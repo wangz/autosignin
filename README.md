@@ -14,3 +14,6 @@ sudo python get-pip.py
     pip install chardet
     pip install BeautifulSoup
 
+crontab -e
+59 8 * * * python /home/wz/autosignin/moofeel.py &>> /home/wz/autosignin/moofeel.log
+
