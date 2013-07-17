@@ -27,13 +27,22 @@ class sign(object):
         except Exception, e:
             print "网络链接错误"
             return False
-        print "登录成功,准备签到！"
         response = urllib2.urlopen(req)
         login=response.read()
-        return login
+        print login
+        l = json.loads(login)
+        if (l['state'] == 1):
+            print "登录成功,准备签到！"
+            return True
+        else:
+            print "登录失败！code:" +  str(l['errcode'])
+            return False
+        
+
     def sign(self):
         response = urllib2.urlopen(self.signurl)
         sign = response.read()
+        print sign
         l = json.loads(sign)
         if (l and l['state'] == 1) or \
         (l and 0 == l['state'] and l['increase'] * 1 == 0 and l['monthtask'].M900 == 900):
