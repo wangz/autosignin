@@ -31,7 +31,7 @@ class sign(object):
         login=response.read()
         print login
         l = json.loads(login)
-        if (l['state'] == 1):
+        if (l['state'] == "1"):
             print "登录成功,准备签到！"
             return True
         else:
