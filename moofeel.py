@@ -92,7 +92,7 @@ class Moofeel(object):
                     fetchmb_url = m.get('href')
         print "fetchmb_url" + str(fetchmb_url)
         #回复信息
-        params = {'message':'I like this ~', 'formhash':formhash,'subject':''}
+        params = {'message':'qiandao qiandao youjiang youjiang ~', 'formhash':formhash,'subject':''}
         print 'reply.......'
         req = urllib2.Request(
             'http://www.moofeel.com/'+form_action,
