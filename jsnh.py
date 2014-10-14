@@ -49,11 +49,11 @@ class Moofeel(object):
         else:
             print 'Logged on error'
     def sign(self):
-        '''找到最新的领取MB的地址'''
+        '''找到最新的烧香地址'''
         siteurl="http://www.jsnh.info/forum.php?mod=forumdisplay&fid=36"
         isfind = False
         count = 0
-        while(isfind == False and count<=300):
+        while(isfind == False and count<=2):
             count = count + 1
             print '尝试次数'+str(count)
             req = urllib2.Request(siteurl)
