@@ -33,24 +33,28 @@ class Moofeel(object):
         params = {'username':self.name, 'password':self.pwd,'fastloginfield':'username','handlekey':'ls','quickforward':'yes'}
         print 'login.......'
         req = urllib2.Request(
-            'http://www.jsnh.info/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes&inajax=1',
+            'http://www.jsnh.net/member.php?mod=logging&action=login&loginsubmit=yes&infloat=yes&lssubmit=yes&inajax=1',
             urllib.urlencode(params)
         )
-        self.operate = self.opener.open(req)
-        #print self.operate.geturl()
-         
-        rawdata = self.operate.read()
-        rawdata = rawdata.decode(chardet.detect(rawdata)['encoding'])
-        print rawdata
-        if rawdata.find("登录失败，你还可以尝试") < 0 :
-            print 'Logged on successfully!'
-            self.cj.save('jsnh.cookie')
-            self.sign()
-        else:
-            print 'Logged on error'
+        count = 0
+        while(count<=10):
+			self.operate = self.opener.open(req)
+			#print self.operate.geturl()
+			 
+			rawdata = self.operate.read()
+			rawdata = rawdata.decode(chardet.detect(rawdata)['encoding'])
+			print rawdata
+			if rawdata.find("您的浏览器需要支持JavaScript") < 0 :
+				print 'Logged on successfully!'
+				self.cj.save('jsnh.cookie')
+				self.sign()
+				break;
+			else:
+				print 'Logged on error,try again'
+				time.sleep(30)
     def sign(self):
         '''找到最新的烧香地址'''
-        siteurl="http://www.jsnh.info/forum.php?mod=forumdisplay&fid=36"
+        siteurl="http://www.jsnh.net/forum.php?mod=forumdisplay&fid=36"
         isfind = False
         count = 0
         while(isfind == False and count<=2):
@@ -78,7 +82,7 @@ class Moofeel(object):
             else:
                 continue
         print realUrl
-        self.replyAndFetch("http://www.jsnh.info/" + realUrl)
+        self.replyAndFetch("http://www.jsnh.net/" + realUrl)
     def replyAndFetch(self,realUrl):
         '''回复信息'''
         req = urllib2.Request(realUrl)
@@ -97,7 +101,7 @@ class Moofeel(object):
         for m in BeautifulSoup(rawdata).findAll('form'):
             if(m.get('id')=='fastpostform'):
                 form_action = m.get('action')
-        form_action = 'http://www.jsnh.info/'+form_action+'&inajax=1'
+        form_action = 'http://www.jsnh.net/'+form_action+'&inajax=1'
         print form_action
         #回复信息
         params = {'message':'shao xiang bao you ping an ~', 'formhash':formhash,'subject':'','usesig':''}
